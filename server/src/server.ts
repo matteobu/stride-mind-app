@@ -9,6 +9,11 @@ app.use((req, res, next) => {
   next();
 });
 
+// app.get('/close', (req, res) => {
+//   // Send a response to the client
+//   res.send('This is the close route');
+// });
+
 // Route to handle root URL
 // Define a route for the root URL ('/')
 app.get('*', (req, res) => {
