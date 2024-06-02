@@ -1,26 +1,24 @@
-const express = require('express');
-import { Request, Response, NextFunction } from 'express';
+import express from 'express';
 
 const app = express();
-const PORT = 3001;
-const server = require('http').Server(app);
+const PORT = process.env.PORT || 3001;
 
 // Middleware to log when a user connects
-app.use((req: Request, res: Response, next: NextFunction) => {
+app.use((req, res, next) => {
   console.log('A user has connected');
   next();
 });
 
 // Route to handle root URL
-app.get('/', (req: Request, res: Response) => {
-  res.send('Welcome to the server!');
+// Define a route for the root URL ('/')
+app.get('*', (req, res) => {
+  // Log a message when a user connects to the root URL
+  console.log('A user has connected to the root URL');
+  // console.log(req.session);
+  res.send('Hello, world!');
 });
 
 // Start the server
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
-
-server.listen(process.env.PORT || 3001, function () {
-  console.log("Ehi, I'm listening 🤟: ");
+  console.log(`Server is running on http://localhost:${PORT} 🍕`);
 });
