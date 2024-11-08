@@ -33,10 +33,10 @@
 }
 
 .Main-body {
-  flex: 1 0 80%; 
+  flex: 1 0 80%;
   display: flex;
+  flex-wrap: wrap; /* Allows cards to wrap onto multiple rows */
   justify-content: center;
-  align-items: center;
   gap: 20px;
   background-color: #f0f8ff;
   padding: 20px;

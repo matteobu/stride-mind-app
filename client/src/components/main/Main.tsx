@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './Main.css';
 import ActivityCard from '../info_card/ActivityCard';
 import { useDispatch } from 'react-redux';
@@ -11,7 +11,7 @@ import {
 import { Runner } from '../../interfaces/runner';
 
 function Main() {
-  const dispatch = useDispatch(); // Get the dispatch function from Redux
+  const dispatch = useDispatch();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [runnerData, setRunnerData] = useState<Runner | null>(null);
   const [runnerActivities, setRunnerActivities] = useState<any[]>([]);
@@ -29,11 +29,10 @@ function Main() {
       if (storedToken) {
         const userData = await fetchUserData(storedToken);
         setRunnerData(userData);
-
-        // Convert runnerInstance to a plain object before dispatching
         dispatch(setRunnerInstance(userData));
 
         const activities = await fetchActivities(storedToken);
+        console.log(activities)
         setRunnerActivities(activities);
       }
     } catch (error) {
@@ -56,7 +55,12 @@ function Main() {
           {runnerData ? (
             <>
               {runnerActivities && runnerActivities.length > 0 ? (
-                <ActivityCard activity={runnerActivities[0]} />
+                // Render the last 10 activities
+                runnerActivities
+                  .slice(-10)
+                  .map((activity, index) => (
+                    <ActivityCard key={index} activity={activity} />
+                  ))
               ) : (
                 <p>No activities available.</p>
               )}
