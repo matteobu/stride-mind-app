@@ -46,3 +46,20 @@ export const redirectToStravaAuth = () => {
 
   window.location.href = stravaAuthUrl;
 };
+
+// Handle Runner Data and Activities
+export const handleRunnerData = async (storedToken: string) => {
+  try {
+    if (storedToken) {
+      // const userData = await fetchUserData(storedToken);
+      // setRunnerData(userData);
+      // dispatch(setRunnerInstance(userData));
+
+      // const activities = await fetchActivities(storedToken);
+      // console.log(activities);
+      // setRunnerActivities(activities);
+    }
+  } catch (error) {
+    console.error('Error fetching runner data:', error);
+  }
+};

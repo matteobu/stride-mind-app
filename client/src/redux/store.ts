@@ -1,5 +1,5 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import runnerReducer from './runnerSlice';
+import runnerReducer from './slices/runnerSlice';
 
 export const store = configureStore({
   reducer: {

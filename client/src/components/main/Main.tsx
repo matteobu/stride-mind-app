@@ -1,44 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './Main.css';
 import ActivityCard from '../info_card/ActivityCard';
-import { useDispatch } from 'react-redux';
-import { setRunnerInstance } from '../../redux/runnerSlice';
-import {
-  fetchActivities,
-  fetchUserData,
-  redirectToStravaAuth,
-} from '../../utils/utils';
-import { Runner } from '../../interfaces/runner';
+import { useSelector } from 'react-redux';
+import { redirectToStravaAuth } from '../../utils/utils';
+import { RootState } from '../../redux/store';
 
 function Main() {
-  const dispatch = useDispatch();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [runnerData, setRunnerData] = useState<Runner | null>(null);
-  const [runnerActivities, setRunnerActivities] = useState<any[]>([]);
-
-  useEffect(() => {
-    const storedToken = localStorage.getItem('strava_access_token');
-    if (storedToken) {
-      handleRunnerData(storedToken);
-      setIsLoggedIn(true);
-    }
-  }, []);
-
-  const handleRunnerData = async (storedToken: string) => {
-    try {
-      if (storedToken) {
-        const userData = await fetchUserData(storedToken);
-        setRunnerData(userData);
-        dispatch(setRunnerInstance(userData));
-
-        const activities = await fetchActivities(storedToken);
-        console.log(activities)
-        setRunnerActivities(activities);
-      }
-    } catch (error) {
-      console.error('Error fetching runner data:', error);
-    }
-  };
+  const [isLoggedIn] = useState(true);
+  const runner = useSelector((state: RootState) => state.runner.runnerInstance);
+  const runnerActivities = useSelector(
+    (state: RootState) => state.runner.runnerActivities
+  );
 
   const handleLogin = () => {
     redirectToStravaAuth();
@@ -52,7 +24,7 @@ function Main() {
         </button>
       ) : (
         <div className="Main-body">
-          {runnerData ? (
+          {runner ? (
             <>
               {runnerActivities && runnerActivities.length > 0 ? (
                 // Render the last 10 activities
