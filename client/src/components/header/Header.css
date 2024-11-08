@@ -1,0 +1,39 @@
+/* Header container */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Aligns logo on the left, user info on the right */
+  background-color: #01541b;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px; /* Adds space around the header */
+}
+
+/* Logo styling */
+.header-logo {
+  height: 50px;
+}
+
+/* Container for the user info on the right */
+.header-user-info {
+  display: flex;
+  align-items: center;
+  background-color: #e0f2e9;
+  gap: 10px;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+/* Profile picture styling */
+.runner-profile-picture {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+/* Welcome text styling */
+.runner-info {
+  color: #01541b;
+  font-size: 1.5rem;
+  margin: 0;
+}

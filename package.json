@@ -1,0 +1,27 @@
+{
+  "name": "stride-mind-app",
+  "version": "1.0.0",
+  "scripts": {
+    "client": "npm start --prefix client",
+    "server:build": "tsc -p server/tsconfig.json",
+    "server:start": "node server/dist/server.js",
+    "server:dev": "tsc -p server/tsconfig.json --watch",
+    "server:watch": "nodemon --watch server/dist --exec \"node server/dist/server.js\"",
+    "server": "concurrently \"npm run server:dev\" \"npm run server:watch\"",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.3",
+    "@types/express-session": "^1.18.0",
+    "concurrently": "^7.6.0",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.11.0"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.3.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express-session": "^1.18.1"
+  }
+}
